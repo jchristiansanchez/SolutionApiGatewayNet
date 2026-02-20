@@ -86,10 +86,10 @@ services:
       ConnectionStrings__NorthwindConnection: 'Server=sqlserver,1433;Database=NetPublisherDB;User Id=sa;Password=SQLdemo11*;TrustServerCertificate=True;'
       Email__Host: smtp.gmail.com
       Email__Port: 587
-      Email__User: csanchezquiet@gmail.com
-      Email__Password: dafafellnytrhhel
-      Email__From: csanchezquiet@gmail.com
-      Email__Cc: sanchezsaraviachristian@gmail.com
+      Email__User: abc
+      Email__Password: abc
+      Email__From: abc
+      Email__Cc: abc
       Kafka__BootstrapServers: kafka:9092
       Kafka__Topic: Notificacion
       Kafka__GroupId: gbulkprocessor-groupt
