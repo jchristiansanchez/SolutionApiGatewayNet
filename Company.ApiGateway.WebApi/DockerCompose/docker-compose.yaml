@@ -1,0 +1,175 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "SQLdemo11*"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sql_data:/var/opt/mssql
+    networks:
+      - backend
+  auth-service:
+    build:
+      context: ./Security
+      dockerfile: Company.Auth.Service.WebApi/Dockerfile
+    container_name: auth-service
+    ports:
+      - "5159:5159"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__NorthwindConnection: 'Server=sqlserver,1433;Database=NetAuthCompanyBD;User Id=sa;Password=SQLdemo11*;TrustServerCertificate=True;'
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5159/health || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    depends_on:
+      - sqlserver
+    networks:
+      - backend
+
+  control-publisher-service:
+    build:
+      context: ./ControlPublisher
+      dockerfile: Company.Publisher.Service.WebApi/Dockerfile
+    container_name: control-publisher-service
+    ports:
+      - "5160:5160"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      jwt__key: "ASDJKNKJN4KJ5N4KJSNDKAJSNDAKSJDNK4J5N43KJ53N4KSNDJASKLDNASD"
+      Seaweed__BaseUrl: "http://seaweedfs:9333"
+      Seaweed__VolumeUrl: "http://seaweedfs:8888"      
+      ConnectionStrings__NorthwindConnection: 'Server=sqlserver,1433;Database=NetPublisherDB;User Id=sa;Password=SQLdemo11*;TrustServerCertificate=True;'      
+      Kafka__BootstrapServers: kafka:9092
+      Kafka__Topic: Pendiente
+      Kafka__GroupId: gbulkprocessor-groupt
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5160/health || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    depends_on:
+      - sqlserver
+      - seaweedfs
+      - kafka
+    networks:
+      - backend
+
+  publisher-consumer-service:
+    build:
+      context: ./PublisherConsumer
+      dockerfile: Company.BulkProcessor.Service.Work/Dockerfile
+    container_name: publisher-consumer-service
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development               
+      ConnectionStrings__NorthwindConnection: 'Server=sqlserver,1433;Database=NetPublisherDB;User Id=sa;Password=SQLdemo11*;TrustServerCertificate=True;'      
+      Kafka__BootstrapServers: kafka:9092
+      Kafka__Topic: Notificacion
+      Kafka__GroupId: gbulkprocessor-groupt
+    depends_on:
+      - sqlserver
+      - kafka
+    networks:
+      - backend
+
+  notification-service:
+    build:
+      context: ./Notification
+      dockerfile: Company.Notification.Service.Work/Dockerfile
+    container_name: notification-service
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development               
+      ConnectionStrings__NorthwindConnection: 'Server=sqlserver,1433;Database=NetPublisherDB;User Id=sa;Password=SQLdemo11*;TrustServerCertificate=True;'
+      Email__Host: smtp.gmail.com
+      Email__Port: 587
+      Email__User: csanchezquiet@gmail.com
+      Email__Password: dafafellnytrhhel
+      Email__From: csanchezquiet@gmail.com
+      Email__Cc: sanchezsaraviachristian@gmail.com
+      Kafka__BootstrapServers: kafka:9092
+      Kafka__Topic: Notificacion
+      Kafka__GroupId: gbulkprocessor-groupt
+    depends_on:
+      - sqlserver
+      - kafka
+    networks:
+      - backend  
+
+  seaweedfs:
+    image: chrislusf/seaweedfs:latest
+    ports:
+      - "9333:9333"
+      - "8888:8888"
+    command: >
+      server
+      -dir=/data
+      -volume.max=5
+      -volume.port=8888
+      -volume.publicUrl=localhost:8888
+    volumes:
+      - ./data:/data
+    networks:
+      - backend
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:29092"
+    depends_on:
+      - kafka
+    networks:
+      - backend
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,DOCKER://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,DOCKER://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,DOCKER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    depends_on:
+      - zookeeper
+    networks:
+      - backend
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - backend
+
+  api-gateway:
+    build:
+      context: ./ApiGateway
+      dockerfile: Company.ApiGateway.WebApi/Dockerfile
+    container_name: api-gateway
+    ports:
+      - "5084:5084"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      jwt__key: "ASDJKNKJN4KJ5N4KJSNDKAJSNDAKSJDNK4J5N43KJ53N4KSNDJASKLDNASD"  
+    depends_on:
+      auth-service:
+        condition: service_healthy
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  seaweed_data:
+  sql_data:
