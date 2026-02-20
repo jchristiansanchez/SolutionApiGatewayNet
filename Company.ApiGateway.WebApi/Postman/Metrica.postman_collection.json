@@ -1,0 +1,546 @@
+{
+  "info": {
+    "_postman_id": "57996aea-5baf-4fd7-85ea-580a23c7bbf5",
+    "name": "Metrica",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18746572"
+  },
+  "item": [
+    {
+      "name": "Local",
+      "item": [
+        {
+          "name": "Security",
+          "item": [
+            {
+              "name": "User",
+              "item": [
+                {
+                  "name": "account-Login",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AZ21haWwuY29tIiwiaWQiOiI2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJleHAiOjE4MDMwMjkyNjl9.rZbyDVLRji7Q63xrvT5HNDkvAfjx4WK3-q8o2Z8G-20",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"admin@empresa.com\",\r\n    \"password\": \"Admin123!\"\r\n    // \"email\": \"usersoporte@gmail.com\",\r\n    // \"password\": \"usersoporte@gmail.com\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "http://localhost:5159//Accounts/Login",
+                      "protocol": "http",
+                      "host": [
+                        "localhost"
+                      ],
+                      "port": "5159",
+                      "path": [
+                        "",
+                        "Accounts",
+                        "Login"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "GetUserById",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{urlsecurity}}/Accounts/GetUserById/3",
+                      "host": [
+                        "{{urlsecurity}}"
+                      ],
+                      "path": [
+                        "Accounts",
+                        "GetUserById",
+                        "3"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Accounts-PostUser",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"email\": \"useradmin@gmail.com\",\r\n  \"password\": \"useradmin@gmail.com\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{urlsecurity}}/Accounts/PostUser",
+                      "host": [
+                        "{{urlsecurity}}"
+                      ],
+                      "path": [
+                        "Accounts",
+                        "PostUser"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Accounts/PostUserListRol",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AZW1wcmVzYS5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBlbXByZXNhLmNvbSIsImlkIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxODAzMDM0Njg2fQ.UmTnsXlmEdNZsMRfYerlMUyJlCJF9tSNYT29yY8kz-w",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"email\": \"@empresa.com\",\r\n  \"password\": \"Admin123!\",\r\n  \"listRol\": [\r\n    1\r\n  ]\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{urlsecurity}}/Accounts/PostUserListRol",
+                      "host": [
+                        "{{urlsecurity}}"
+                      ],
+                      "path": [
+                        "Accounts",
+                        "PostUserListRol"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Rol",
+              "item": [
+                {
+                  "name": "PostRol",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AZW1wcmVzYS5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBlbXByZXNhLmNvbSIsImlkIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxODAzMDM0Njg2fQ.UmTnsXlmEdNZsMRfYerlMUyJlCJF9tSNYT29yY8kz-w",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"description\": \"soporte\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{urlsecurity}}/Accounts/PostRol",
+                      "host": [
+                        "{{urlsecurity}}"
+                      ],
+                      "path": [
+                        "Accounts",
+                        "PostRol"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Accounts-GetAllRol",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{urlsecurity}}/Accounts/GetAllRol",
+                      "host": [
+                        "{{urlsecurity}}"
+                      ],
+                      "path": [
+                        "Accounts",
+                        "GetAllRol"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Upload",
+          "item": [
+            {
+              "name": "UploadFile",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AZW1wcmVzYS5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBlbXByZXNhLmNvbSIsImlkIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxODAzMDc5ODE5fQ.hwTd1zikabFe4QiCWYt8TWtbry8bfYe5XYdlsVW-GUI",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "FileItem",
+                      "type": "file",
+                      "uuid": "aef01022-816b-4dc1-8a76-ab0515b698e4",
+                      "src": "/C:/Users/CHRIS/Desktop/Metrica_v2/Archivos/CargaDatos.xlsx"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:5160/api/v1/Upload/UploadFile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5160",
+                  "path": [
+                    "api",
+                    "v1",
+                    "Upload",
+                    "UploadFile"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ApiGateway",
+          "item": [
+            {
+              "name": "http://localhost:5084/login",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"admin@empresa.com\",\r\n    \"password\": \"Admin123!\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5084/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5084",
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "http://localhost:5084/UploadFile",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {}
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AZW1wcmVzYS5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBlbXByZXNhLmNvbSIsImlkIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxODAzMDc5ODE5fQ.hwTd1zikabFe4QiCWYt8TWtbry8bfYe5XYdlsVW-GUI",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "ClientId",
+                    "value": "cliente1",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "FileItem",
+                      "type": "file",
+                      "uuid": "288e68ff-84c1-4543-8edf-154e84588f4b",
+                      "src": "/C:/Users/CHRIS/Desktop/Metrica_v2/Archivos/CargaDatos.xlsx"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:5084/UploadFile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5084",
+                  "path": [
+                    "UploadFile"
+                  ],
+                  "query": [
+                    {
+                      "key": "ClientIdHeader",
+                      "value": "ClientId",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Docker",
+      "item": [
+        {
+          "name": "Security",
+          "item": [
+            {
+              "name": "User",
+              "item": [
+                {
+                  "name": "account-Login",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5AZ21haWwuY29tIiwiaWQiOiI2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJleHAiOjE4MDMwMjkyNjl9.rZbyDVLRji7Q63xrvT5HNDkvAfjx4WK3-q8o2Z8G-20",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"admin@empresa.com\",\r\n    \"password\": \"Admin123!\"\r\n    // \"email\": \"usersoporte@gmail.com\",\r\n    // \"password\": \"usersoporte@gmail.com\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "http://localhost:5159/api/v1/Accounts/Login",
+                      "protocol": "http",
+                      "host": [
+                        "localhost"
+                      ],
+                      "port": "5159",
+                      "path": [
+                        "api",
+                        "v1",
+                        "Accounts",
+                        "Login"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Upload",
+          "item": [
+            {
+              "name": "UploadFile",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AZW1wcmVzYS5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBlbXByZXNhLmNvbSIsImlkIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxODAzMDc5ODE5fQ.hwTd1zikabFe4QiCWYt8TWtbry8bfYe5XYdlsVW-GUI",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "FileItem",
+                      "type": "file",
+                      "uuid": "aef01022-816b-4dc1-8a76-ab0515b698e4",
+                      "src": [
+                        "/C:/Users/CHRIS/Desktop/Metrica_v2/Archivos/CargaDatos.xlsx",
+                        "/C:/Users/CHRIS/Desktop/Metrica_v2/Archivos/CargaDatos.xlsx"
+                      ]
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:5160/api/v1/Upload/UploadFile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5160",
+                  "path": [
+                    "api",
+                    "v1",
+                    "Upload",
+                    "UploadFile"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ApiGateway",
+          "item": [
+            {
+              "name": "http://localhost:5084/login",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"admin@empresa.com\",\r\n    \"password\": \"Admin123!\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5084/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5084",
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "http://localhost:5084/UploadFile",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {}
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW5AZW1wcmVzYS5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBlbXByZXNhLmNvbSIsImlkIjoiMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxODAzMDc5ODE5fQ.hwTd1zikabFe4QiCWYt8TWtbry8bfYe5XYdlsVW-GUI",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "ClientId",
+                    "value": "cliente1",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "FileItem",
+                      "type": "file",
+                      "uuid": "288e68ff-84c1-4543-8edf-154e84588f4b",
+                      "src": "/C:/Users/CHRIS/Desktop/Metrica_v2/Archivos/CargaDatos.xlsx"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:5084/UploadFile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5084",
+                  "path": [
+                    "UploadFile"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
